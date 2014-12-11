@@ -101,6 +101,7 @@
                 }
 
                 var masterName,
+                    cookie = document.cookie.match(/locale(?=.).\w*/),
                     match = nlsRegExp.exec(name),
                     prefix = match[1],
                     locale = match[4],
@@ -122,11 +123,12 @@
                     masterName = name;
                     suffix = match[4];
                     locale = masterConfig.locale;
+                    cookie = cookie ? cookie[0].split("=")[1] : '';
                     if (!locale) {
                         locale = masterConfig.locale =
                             typeof navigator === "undefined" ? "root" :
-                            (window.locale ||
-                             document.cookie.match(/lang(?=.).\w*/)[0].split("=")[1] ||
+                            (cookie ||
+                             window.locale ||
                              navigator.language ||
                              navigator.userLanguage || "root").toLowerCase();
                     }
