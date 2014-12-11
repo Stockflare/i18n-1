@@ -125,7 +125,9 @@
                     if (!locale) {
                         locale = masterConfig.locale =
                             typeof navigator === "undefined" ? "root" :
-                            (navigator.language ||
+                            (window.locale ||
+                             document.cookie.match(/lang(?=.).\w*/)[0].split("=")[1] ||
+                             navigator.language ||
                              navigator.userLanguage || "root").toLowerCase();
                     }
                     parts = locale.split("-");
