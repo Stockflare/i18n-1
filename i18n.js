@@ -127,8 +127,8 @@
                     if (!locale) {
                         locale = masterConfig.locale =
                             typeof navigator === "undefined" ? "root" :
-                            (cookie ||
-                             window.locale ||
+                            (window.locale ||
+                             cookie ||
                              navigator.language ||
                              navigator.userLanguage || "root").toLowerCase();
                     }
