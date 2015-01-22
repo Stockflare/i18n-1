@@ -64,6 +64,13 @@
         }
     }
 
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
     /**
      * Simple function to mix in properties from source into target,
      * but only if target does not already have a property of the same name.
@@ -124,10 +131,11 @@
                     suffix = match[4];
                     locale = masterConfig.locale;
                     cookie = cookie ? cookie[0].split("=")[1] : "";
+                    query = getParameterByName('locale');
                     if (!locale) {
                         locale = masterConfig.locale =
                             typeof navigator === "undefined" ? "root" :
-                            (window.locale ||
+                            (query || window.locale ||
                              cookie ||
                              navigator.language ||
                              navigator.userLanguage || "root").toLowerCase();
