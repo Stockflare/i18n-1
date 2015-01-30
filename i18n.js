@@ -109,7 +109,7 @@
 
         var masterName,
         cookie = typeof document === "undefined" ? "" : document.cookie.match(/locale(?=.).\w*/),
-        query = getParameterByName('locale'),
+        query = typeof document === "undefined" ? "" : getParameterByName('locale'),
         match = nlsRegExp.exec(name),
         prefix = match[1],
         locale = match[4],
